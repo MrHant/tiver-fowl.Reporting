@@ -8,7 +8,7 @@ namespace Tiver.Fowl.Reporting.Tests
         [Test]
         public void Test1()
         {
-            var test = Report.Build("./ReportTemplates/simple.hbs");
+            var test = Report.Build("log.txt", "./ReportTemplates/simple.hbs");
         }
     }
 }
