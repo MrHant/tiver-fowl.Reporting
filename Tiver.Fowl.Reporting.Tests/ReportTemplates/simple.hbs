@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<body>
+{{#tests}}
+    <div>
+        <h2><i>{{Key.Item1}}</i> - {{Key.Item2}}</h2>
+        <dl>
+            {{#Value}}
+                <dt>
+                    {{Properties.LogType}}
+                </dt>
+                <dd>
+                    <pre>{{MessageTemplate}}</pre>
+                </dd>
+            {{/Value}}
+        </dl>
+    </div>
+{{/tests}}
+</body>
+</html>
