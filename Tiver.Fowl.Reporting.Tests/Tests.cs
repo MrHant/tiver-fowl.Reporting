@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
+using System.Reflection;
+using NUnit.Framework;
 
 namespace Tiver.Fowl.Reporting.Tests
 {
@@ -6,9 +8,17 @@ namespace Tiver.Fowl.Reporting.Tests
     public class Tests
     {
         [Test]
-        public void Test1()
+        public void ReportContentIsNotEmpty()
         {
-            var test = Report.Build("log.txt", "./ReportTemplates/simple.hbs");
+            string GetFilepath(string f) =>
+                Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "", f);
+
+            var reportContent = Report.Build(
+                GetFilepath("./in/cockatiel_log.txt"),
+                GetFilepath("./ReportTemplates/simple.hbs")
+            );
+            
+            Assert.IsTrue(!string.IsNullOrEmpty(reportContent));
         }
     }
 }

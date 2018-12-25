@@ -52,6 +52,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="in\cockatiel_log.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ReportTemplates\**\*.*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
