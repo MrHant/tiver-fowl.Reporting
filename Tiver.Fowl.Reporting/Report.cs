@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,13 +14,17 @@ namespace Tiver.Fowl.Reporting
         {
             var template = Handlebars.Compile(File.ReadAllText(templateFilepath));
 
-            var log = ReadLogFile(logFilepath);
-            var temp = log.GroupBy(l => l["Properties"]["TestId"].Value<string>());
-            var data = temp.ToDictionary(l => l.Key);
+            var rawLog = ReadLogFile(logFilepath);
+            var testsData = rawLog
+                .GroupBy(l => Tuple.Create(
+                    l["Properties"]["TestId"].Value<string>(),
+                    l["Properties"]["TestName"].Value<string>()
+                ))
+                .ToDictionary(l => l.Key);
 
             return template(new Dictionary<string,object>()
             {
-                {"tests", data}
+                {"tests", testsData}
             });
         }
 
