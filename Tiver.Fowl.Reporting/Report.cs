@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using HandlebarsDotNet;
 using Newtonsoft.Json.Linq;
 
@@ -12,7 +13,7 @@ namespace Tiver.Fowl.Reporting
         {
             var template = Handlebars.Compile(File.ReadAllText(templateFilepath));
 
-            var log = File.ReadAllLines(logFilepath).Select(JObject.Parse);
+            var log = ReadLogFile(logFilepath);
             var temp = log.GroupBy(l => l["Properties"]["TestId"].Value<string>());
             var data = temp.ToDictionary(l => l.Key);
 
@@ -20,6 +21,22 @@ namespace Tiver.Fowl.Reporting
             {
                 {"tests", data}
             });
+        }
+
+        private static IEnumerable<JObject> ReadLogFile(string logFileFilepath)
+        {
+            var lines = new List<JObject>();
+            using (var fileStream = new FileStream(logFileFilepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var streamReader = new StreamReader(fileStream, Encoding.Default))
+            {
+                string line;
+                while ((line = streamReader.ReadLine()) != null)
+                {
+                    lines.Add(JObject.Parse(line));
+                }
+            }
+
+            return lines;
         }
     }
 }
