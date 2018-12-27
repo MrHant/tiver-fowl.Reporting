@@ -69,7 +69,7 @@ Task("RunUnitTestsNUnit")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    NUnit("./" + project + "/bin/" + configuration + "/" + project + ".Tests.dll", new NUnitSettings {
+    NUnit("./Tiver.Fowl.Reporting.Tests/bin/" + configuration + "/Tiver.Fowl.Reporting.Tests.dll", new NUnitSettings {
         ToolPath = "./tools/NUnit.ConsoleRunner/tools/nunit3-console.exe"
     }); 
 });
