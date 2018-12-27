@@ -65,6 +65,15 @@ Task("Build")
     });
 });
 
+Task("RunUnitTestsNUnit")
+    .IsDependentOn("Build")
+    .Does(() =>
+{
+    NUnit("./" + project + "/bin/" + configuration + "/" + project + ".Tests.dll", new NUnitSettings {
+        ToolPath = "./tools/NUnit.ConsoleRunner/tools/nunit3-console.exe"
+    }); 
+});
+
 Task("Version")
     .Does(() => 
 {
@@ -80,7 +89,7 @@ Task("Version")
 });
    
 Task("CreateNuGetPackage")
-    .IsDependentOn("Build")
+    .IsDependentOn("RunUnitTestsNUnit")
     .Does(() =>
 {
     Information("Packing version {0}", version);
