@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Tiver.Fowl.Reporting</id>
+    <version>0.1.0</version>
+    <authors>Artyom Silivonchik</authors>
+    <owners>Artyom Silivonchik</owners>
+    <licenseUrl>https://raw.githubusercontent.com/MrHant/tiver-fowl.Reporting/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/MrHant/tiver-fowl.Reporting</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Template-based HTML reporting</description>
+    <dependencies />
+  </metadata>
+  <files>
+    <file src="..\Tiver.Fowl.Reporting\bin\Release\Tiver.*" target="lib\net45" />
+  </files>
+</package>
